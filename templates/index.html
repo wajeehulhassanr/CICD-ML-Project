@@ -22,10 +22,10 @@
     <p>Enter feature values to predict the Iris flower type.</p>
 
     <form id="predictForm">
-        <input type="text" id="feature1" placeholder="Feature 1" required>
-        <input type="text" id="feature2" placeholder="Feature 2" required>
-        <input type="text" id="feature3" placeholder="Feature 3" required>
-        <input type="text" id="feature4" placeholder="Feature 4" required>
+        <input type="number" id="feature1" placeholder="Feature 1" required>
+        <input type="number" id="feature2" placeholder="Feature 2" required>
+        <input type="number" id="feature3" placeholder="Feature 3" required>
+        <input type="number" id="feature4" placeholder="Feature 4" required>
         <br>
         <button type="submit">Predict</button>
     </form>
@@ -51,9 +51,9 @@
 
             let result = await response.json();
             if (result.status === "success") {
-                document.getElementById("predictionResult").innerText = result.predictions[0];
+                document.getElementById("predictionResult").innernumber = result.predictions[0];
             } else {
-                document.getElementById("predictionResult").innerText = "Error: " + result.message;
+                document.getElementById("predictionResult").innernumber = "Error: " + result.message;
             }
         };
     </script>
