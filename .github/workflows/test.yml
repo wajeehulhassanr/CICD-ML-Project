@@ -1,0 +1,32 @@
+name: Run Unit Tests on PR
+
+on:
+  pull_request:
+    branches:
+      - dev  # Ensure tests run when PR is created for 'dev'
+  push:
+    branches:
+      - dev  # Ensure tests run on push to 'dev'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Unit Tests
+        run: pytest tests/ --maxfail=1 --disable-warnings -q
+
+      - name: Fail if tests fail
+        if: failure()
+        run: exit 1
