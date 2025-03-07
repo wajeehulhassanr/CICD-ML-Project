@@ -1,26 +1,18 @@
-FROM python:3.9-slim
+# Use official Python base image
+FROM python:3.11-slim
 
+# Set the working directory
 WORKDIR /app
 
-# Copy requirements first for better layer caching
+# Copy and install dependencies
 COPY requirements.txt .
-
-# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY src/ ./src/
+# Copy the entire application
+COPY src/ .
 
-# Create directory for models
-RUN mkdir -p models
+# Expose Flask's default port
+EXPOSE 5000
 
-# Set environment variables
-ENV MODEL_PATH=models/iris_model.joblib
-ENV PORT=5000
-ENV PYTHONPATH=/app
-
-# Expose port
-EXPOSE ${PORT}
-
-# Run the application
-CMD ["python", "src/app.py"] 
+# Set the command to run the application
+CMD ["python", "app.py"]
